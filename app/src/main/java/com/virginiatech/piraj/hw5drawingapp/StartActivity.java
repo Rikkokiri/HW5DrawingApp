@@ -21,9 +21,10 @@ import java.util.Date;
 public class StartActivity extends AppCompatActivity {
 
     private Button takePictureButton;
-    private Uri imageFile;
+    private Uri imageURI;
 
     private final int TAKE_PHOTO_CODE = 666;
+    private final static String IMAGE_INTENT = "imageURI";
 
     /*
      * <o><o><o><o><o><o> OnCreate <o><o><o><o><o><o>
@@ -63,8 +64,8 @@ public class StartActivity extends AppCompatActivity {
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
 
-            imageFile = Uri.fromFile(createImageFile());
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFile);
+            imageURI = Uri.fromFile(createImageFile());
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageURI);
 
             startActivityForResult(takePictureIntent, TAKE_PHOTO_CODE);
         }
@@ -74,6 +75,7 @@ public class StartActivity extends AppCompatActivity {
     //--------------- onActivityResult -------------------------------
 
     /**
+     * Start DrawingActivity and pass activity the image URI
      *
      * @param requestCode
      * @param resultCode
@@ -83,12 +85,16 @@ public class StartActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK) {
 
-            //Start the DrawingActivity
+            System.out.println("IMAGE FILE CREATED:" + imageURI.toString()); //Just for testing
+
+            //Create intent for starting DrawingActivity
+            Intent startDrawingIntent = new Intent(this, DrawingActivity.class);
 
             //Pass the URI saved to imageFile to the activity
-            //Check that (imageFile != null)?
-            System.out.println("IMAGE FILE CREATED:" + imageFile.toString()); //Just for testing
+            startDrawingIntent.putExtra(IMAGE_INTENT, imageURI.toString());
 
+            //Start the DrawingActivity
+            startActivity(startDrawingIntent);
         }
     }
 
