@@ -4,10 +4,10 @@
     android:id="@+id/activity_drawing"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp"
     tools:context="com.virginiatech.piraj.hw5drawingapp.DrawingActivity">
 
     <!-- Canvas for drawing -->
@@ -22,31 +22,71 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        >
+        android:stretchColumns="*"
+        android:layout_alignParentBottom="true"
+        android:padding="10dp">
 
-        <TableRow>
+        <TableRow
+            android:layout_margin="0dp">
 
             <!-- Red -->
             <Button
-                android:id="@+id/red"/>
+                android:id="@+id/red"
+                android:text="Red"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:paddingTop="0dp"/>
 
             <!-- Blue -->
             <Button
-                android:id="@+id/blue"/>
+                android:id="@+id/blue"
+                android:text="Blue"
+                android:layout_width="0dp"
+
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:paddingTop="0dp"/>
 
             <!-- Green -->
             <Button
-                android:id="@+id/green"/>
+                android:id="@+id/green"
+                android:text="Green"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:paddingTop="0dp"/>
 
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:layout_margin="0dp">
             <!-- Clear -->
+            <Button
+                android:id="@+id/clearButton"
+                android:text="Clear"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:paddingTop="0dp"/>
 
             <!-- Undo -->
+            <Button
+                android:id="@+id/undoButton"
+                android:text="Undo"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:paddingTop="0dp"/>
 
             <!-- Done -->
-
+            <Button
+                android:id="@+id/doneButton"
+                android:text="Done"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:paddingTop="0dp"/>
 
         </TableRow>
 
