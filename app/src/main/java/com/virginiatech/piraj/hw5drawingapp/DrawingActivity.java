@@ -2,19 +2,17 @@ package com.virginiatech.piraj.hw5drawingapp;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-
-import java.io.File;
 
 /**
  * Activity where the actual drawing happens
+ *
+ * @author Pilvi Rajala (piraj)
+ * @version 2016.11.23
  */
 
 public class DrawingActivity extends AppCompatActivity {
@@ -43,9 +41,6 @@ public class DrawingActivity extends AppCompatActivity {
 
         canvas = (DrawingCanvas) findViewById(R.id.drawingCanvas);
 
-        //Fill the screen with the canvas
-        //canvas.setScaleType(ImageView.ScaleType.FIT_XY);
-
         //Get intent that the StartActivity used to start this activity
         Intent imageIntent = getIntent();
 
@@ -62,12 +57,19 @@ public class DrawingActivity extends AppCompatActivity {
         blueColor = (Button) findViewById(R.id.blue);
         greenColor = (Button) findViewById(R.id.green);
 
-        ColourListener colourListener = new ColourListener();
         redColor.setOnClickListener(colourListener);
         blueColor.setOnClickListener(colourListener);
         greenColor.setOnClickListener(colourListener);
 
         // ----- Action buttons and listeners -----------
+        clearButton = (Button) findViewById(R.id.clearButton);
+        clearButton.setOnClickListener(clearHandler);
+
+        undoButton = (Button) findViewById(R.id.undoButton);
+        undoButton.setOnClickListener(undoHandler);
+
+        doneButton = (Button) findViewById(R.id.doneButton);
+        doneButton.setOnClickListener(doneHandler);
 
     }
 
@@ -81,9 +83,39 @@ public class DrawingActivity extends AppCompatActivity {
     }
 
     /**
+     * OnClickListener for clear button
+     */
+    private View.OnClickListener clearHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+        }
+    };
+
+    /**
+     * OnClickListener for undo button
+     */
+    private View.OnClickListener undoHandler = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+
+        }
+    };
+
+    /**
+     * OnClickListener for done button
+     */
+    private View.OnClickListener doneHandler = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+
+        }
+    };
+
+    /**
      * Listener for colour buttons
      */
-    public class ColourListener implements View.OnClickListener {
+    private View.OnClickListener colourListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
@@ -99,6 +131,6 @@ public class DrawingActivity extends AppCompatActivity {
                     break;
             }
         }
-    }
+    };
 
 }

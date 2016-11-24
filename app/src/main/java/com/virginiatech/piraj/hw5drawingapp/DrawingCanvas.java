@@ -5,12 +5,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 
 /**
- * Created by Pilvi on 23/11/16.
+ * TODO Javadoc
+ *
+ * @author Pilvi Rajala (piraj)
+ * @version 2016.11.23
  */
 
 public class DrawingCanvas extends ImageView {

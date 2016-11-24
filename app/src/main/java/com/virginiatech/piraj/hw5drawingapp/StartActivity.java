@@ -18,6 +18,13 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * TODO Javadoc
+ *
+ * @author Pilvi Rajala (piraj)
+ * @version 2016.11.23
+ */
+
 public class StartActivity extends AppCompatActivity {
 
     private Button takePictureButton;
