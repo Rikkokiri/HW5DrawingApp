@@ -7,6 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.io.File;
@@ -17,9 +19,22 @@ import java.io.File;
 
 public class DrawingActivity extends AppCompatActivity {
 
-    private ImageView imageView;
-
     private DrawingCanvas canvas;
+
+    // --- Color Buttons ---
+    private Button redColor;
+    private Button blueColor;
+    private Button greenColor;
+
+    //--- HEX values for colors ---
+    private String red = "#ff0000";
+    private String blue = "#0000ff";
+    private String green = "#008000";
+
+    // --- Action Buttons ---
+    private Button clearButton;
+    private Button undoButton;
+    private Button doneButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +52,53 @@ public class DrawingActivity extends AppCompatActivity {
         //Get the image URI from the intent
         Bundle extras = imageIntent.getExtras();
         Uri imageURI = Uri.parse(extras.getString("imageURI"));
-        System.out.println("DrawingActivity: image URI received " + imageURI.toString()); //Just for testing
-        //imageView = (ImageView) findViewById(R.id.testImageView);
-        //imageView.setImageURI(imageURI); //Just for testing
 
-        //TODO Set the image as the background of the canvas
-
+        //Set the image as the background of the canvas
         canvas.setImageURI(imageURI);
+
+        // ----- Colour buttons and listeners -----------
+
+        redColor = (Button) findViewById(R.id.red);
+        blueColor = (Button) findViewById(R.id.blue);
+        greenColor = (Button) findViewById(R.id.green);
+
+        ColourListener colourListener = new ColourListener();
+        redColor.setOnClickListener(colourListener);
+        blueColor.setOnClickListener(colourListener);
+        greenColor.setOnClickListener(colourListener);
+
+        // ----- Action buttons and listeners -----------
 
     }
 
+    /**
+     * Change the color of the paint
+     *
+     * @param color New paint color
+     */
+    public void changePaintColor(int color){
+        canvas.changePaintColor(color);
+    }
 
+    /**
+     * Listener for colour buttons
+     */
+    public class ColourListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
 
-
+            switch (view.getId()){
+                case R.id.red:
+                    changePaintColor(Color.parseColor(red));
+                    break;
+                case R.id.blue:
+                    changePaintColor(Color.parseColor(blue));
+                    break;
+                case R.id.green:
+                    changePaintColor(Color.parseColor(green));
+                    break;
+            }
+        }
+    }
 
 }
