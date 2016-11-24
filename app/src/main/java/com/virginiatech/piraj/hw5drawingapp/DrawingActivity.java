@@ -14,10 +14,14 @@ public class DrawingActivity extends AppCompatActivity {
 
     private ImageView imageView;
 
+    private DrawingCanvas canvas;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawing);
+
+        //canvas = (DrawingCanvas) findViewById(R.id.drawingCanvas);
 
         //Get intent that the StartActivity used to start this activity
         Intent imageIntent = getIntent();
@@ -25,12 +29,16 @@ public class DrawingActivity extends AppCompatActivity {
         //Get the image URI from the intent
         Bundle extras = imageIntent.getExtras();
         Uri imageURI = Uri.parse(extras.getString("imageURI"));
-
         System.out.println("DrawingActivity: image URI received " + imageURI.toString()); //Just for testing
-
         imageView = (ImageView) findViewById(R.id.testImageView);
+        imageView.setImageURI(imageURI); //Just for testing
 
-        imageView.setImageURI(imageURI);
+        //TODO Set the image as the background of the canvas
+
 
     }
+
+
+
+
 }
