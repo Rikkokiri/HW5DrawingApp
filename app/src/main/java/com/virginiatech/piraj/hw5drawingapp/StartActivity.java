@@ -21,7 +21,9 @@ import java.util.Date;
 public class StartActivity extends AppCompatActivity {
 
     private Button takePictureButton;
-    private Uri file;
+    private Uri imageFile;
+
+    private final int TAKE_PHOTO_CODE = 666;
 
     /*
      * <o><o><o><o><o><o> OnCreate <o><o><o><o><o><o>
@@ -34,18 +36,18 @@ public class StartActivity extends AppCompatActivity {
         //Button that is used to take a picture
         takePictureButton = (Button) findViewById(R.id.takePicture);
 
-        //Check permissions, disable picture taking button if we don't have camera permissions
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            takePictureButton.setEnabled(false);
-            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
-        }
-
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 takePicture();
             }
         });
+
+        //Check permissions, disable picture taking button if we don't have camera permissions
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            takePictureButton.setEnabled(false);
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+        }
 
     }
 
@@ -61,18 +63,43 @@ public class StartActivity extends AppCompatActivity {
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
 
-            /*
-            file = Uri.fromFile(getOutputMediaFile());
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
-            startActivityForResult(intent, 100);
-             */
+            imageFile = Uri.fromFile(createImageFile());
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFile);
 
+            startActivityForResult(takePictureIntent, TAKE_PHOTO_CODE);
         }
 
     }
 
+    //--------------- onActivityResult -------------------------------
+
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK) {
+
+            //Start the DrawingActivity
+
+            //Pass the URI saved to imageFile to the activity
+            //Check that (imageFile != null)?
+            System.out.println("IMAGE FILE CREATED:" + imageFile.toString()); //Just for testing
+
+        }
+    }
+
     //--------------- STORAGE -------------------------------
 
+    /**
+     * Create a file reference that the image data will be saved to
+     *
+     * @return A file reference the image data will be saved to
+     *         Null if creating the reference failed
+     */
     private File createImageFile(){
 
         File storageDir = new File(Environment.getExternalStoragePublicDirectory(
@@ -92,24 +119,6 @@ public class StartActivity extends AppCompatActivity {
         return new File(storageDir.getPath() + File.separator + "IMG_" + timestamp + ".jpg");
     }
 
-    /*
-    // Create the File where the photo should go
-    File photoFile = null;
-    try {
-        photoFile = createImageFile();
-    } catch (IOException ex) {
-        // Error occurred while creating the File
-        ...
-    }
-    // Continue only if the File was successfully created
-    if (photoFile != null) {
-        Uri photoURI = FileProvider.getUriForFile(this,
-                "com.example.android.fileprovider",
-                photoFile);
-        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-        startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-    }
-    */
 
     //--------------- PERMISSIONS ---------------------------
 
