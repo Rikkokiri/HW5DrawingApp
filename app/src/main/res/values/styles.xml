@@ -8,4 +8,19 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Style for drawing canvas buttons -->
+    <style name="canvasButtons">
+        <item name="android:padding">5dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:textColor">#000</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:background">#D3D3D3</item>
+    </style>
+
+    <!-- Base style for color buttons -->
+    <style name="ColorButtons" parent="canvasButtons">
+        <item name="android:textColor">#fff</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

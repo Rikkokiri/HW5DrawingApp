@@ -19,6 +19,9 @@
         android:adjustViewBounds="true">
     </com.virginiatech.piraj.hw5drawingapp.DrawingCanvas>
 
+
+    <!-- Buttons -->
+
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -35,18 +38,17 @@
                 android:text="Red"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:padding="3dp"
-                android:paddingTop="0dp"/>
+                style="@style/ColorButtons"
+                android:background="#FF0000"/>
 
             <!-- Blue -->
             <Button
                 android:id="@+id/blue"
                 android:text="Blue"
                 android:layout_width="0dp"
-
                 android:layout_weight="1"
-                android:padding="3dp"
-                android:paddingTop="0dp"/>
+                style="@style/ColorButtons"
+                android:background="#0000FF"/>
 
             <!-- Green -->
             <Button
@@ -54,21 +56,21 @@
                 android:text="Green"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:padding="3dp"
-                android:paddingTop="0dp"/>
+                style="@style/ColorButtons"
+                android:background="#008000"/>
 
         </TableRow>
 
         <TableRow
             android:layout_margin="0dp">
+
             <!-- Clear -->
             <Button
                 android:id="@+id/clearButton"
                 android:text="Clear"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:padding="3dp"
-                android:paddingTop="0dp"/>
+                style="@style/canvasButtons"/>
 
             <!-- Undo -->
             <Button
@@ -76,8 +78,7 @@
                 android:text="Undo"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:padding="3dp"
-                android:paddingTop="0dp"/>
+                style="@style/canvasButtons"/>
 
             <!-- Done -->
             <Button
@@ -85,8 +86,7 @@
                 android:text="Done"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:padding="3dp"
-                android:paddingTop="0dp"/>
+                style="@style/canvasButtons"/>
 
         </TableRow>
 
