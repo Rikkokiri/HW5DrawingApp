@@ -10,13 +10,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.virginiatech.piraj.hw5drawingapp.DrawingActivity">
 
+    <!-- Canvas for drawing -->
     <com.virginiatech.piraj.hw5drawingapp.DrawingCanvas
         android:id="@+id/drawingCanvas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-    />
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true">
+    </com.virginiatech.piraj.hw5drawingapp.DrawingCanvas>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TableRow>
+
+            <!-- Red -->
+            <Button
+                android:id="@+id/red"/>
+
+            <!-- Blue -->
+            <Button
+                android:id="@+id/blue"/>
+
+            <!-- Green -->
+            <Button
+                android:id="@+id/green"/>
+
+        </TableRow>
+
+        <TableRow>
+            <!-- Clear -->
+
+            <!-- Undo -->
+
+            <!-- Done -->
 
 
+        </TableRow>
 
+    </TableLayout>
 
 </RelativeLayout>

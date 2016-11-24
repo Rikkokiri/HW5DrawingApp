@@ -6,12 +6,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 
 /**
  * Created by Pilvi on 23/11/16.
  */
 
-public class DrawingCanvas extends View {
+public class DrawingCanvas extends ImageView {
 
     private Paint pathPaint;
 

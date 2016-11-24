@@ -1,10 +1,15 @@
 package com.virginiatech.piraj.hw5drawingapp;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
+
+import java.io.File;
 
 /**
  * Activity where the actual drawing happens
@@ -21,7 +26,10 @@ public class DrawingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawing);
 
-        //canvas = (DrawingCanvas) findViewById(R.id.drawingCanvas);
+        canvas = (DrawingCanvas) findViewById(R.id.drawingCanvas);
+
+        //Fill the screen with the canvas
+        //canvas.setScaleType(ImageView.ScaleType.FIT_XY);
 
         //Get intent that the StartActivity used to start this activity
         Intent imageIntent = getIntent();
@@ -30,13 +38,15 @@ public class DrawingActivity extends AppCompatActivity {
         Bundle extras = imageIntent.getExtras();
         Uri imageURI = Uri.parse(extras.getString("imageURI"));
         System.out.println("DrawingActivity: image URI received " + imageURI.toString()); //Just for testing
-        imageView = (ImageView) findViewById(R.id.testImageView);
-        imageView.setImageURI(imageURI); //Just for testing
+        //imageView = (ImageView) findViewById(R.id.testImageView);
+        //imageView.setImageURI(imageURI); //Just for testing
 
         //TODO Set the image as the background of the canvas
 
+        canvas.setImageURI(imageURI);
 
     }
+
 
 
 
