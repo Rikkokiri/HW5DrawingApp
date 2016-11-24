@@ -76,7 +76,6 @@ public class DrawingActivity extends AppCompatActivity {
         doneButton.setOnClickListener(doneHandler);
 
         // ----- TouchHandler -----------
-        
         touchHandler = new TouchHandler(this); //Pass TouchHandler a reference to this activity
         canvas.setOnTouchListener(touchHandler);
 
@@ -142,17 +141,25 @@ public class DrawingActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Draw a new path
+     *
+     * @param id Path id
+     * @param x X-coordinate of the path
+     * @param y Y-coordinate of the path
+     */
     public void addNewPath(int id, float x, float y) {
-        //TODO
+        canvas.addPath(id, x, y);
     }
 
     public void updatePath(int id, float x, float y) {
         //TODO
+        canvas.updatePath(id, x, y);
     }
 
     public void removePath(int id) {
-
         //TODO?
-
+        removePath(id);
     }
+
 }

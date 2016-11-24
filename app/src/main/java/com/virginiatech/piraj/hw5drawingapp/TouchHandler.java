@@ -71,8 +71,8 @@ public class TouchHandler implements View.OnTouchListener {
                 for(int i = 0, size = motionEvent.getPointerCount(); i < size; i++){
 
                     //TODO ?
-                    //int id = motionEvent.getPointerId(i);
-                    //drawingActivity.removePath(id);
+                    int id = motionEvent.getPointerId(i);
+                    drawingActivity.removePath(id);
                 }
                 break;
         }
@@ -114,6 +114,11 @@ public class TouchHandler implements View.OnTouchListener {
             System.out.println("****** LONG PRESS ******");
 
             //TODO drawingActivity.onLongPress(event);
+            float x = event.getX();
+            float y = event.getY();
+
+
+
 
             super.onLongPress(event);
         }
