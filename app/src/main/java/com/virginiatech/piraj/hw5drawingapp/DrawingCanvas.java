@@ -38,6 +38,10 @@ public class DrawingCanvas extends View {
         pathPaint.setColor(color);
     }
 
+    /**
+     *
+     * @param canvas
+     */
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
