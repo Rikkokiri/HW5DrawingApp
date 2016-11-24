@@ -4,9 +4,9 @@
 
 This homework exercises your abilities to fetch a picture from the camera, handle the multitouch event and use Canvas to create a customized image. The core tasks ask that you appropriately use camera, OnTouchListener and Canvas to take a picture, and use the multi-touch to paint on the picture. The application to be developed is a picture-painting app: user takes a picture with a camera first, and draws lines and icons on the picture with multi-touch and gestures. The requirements are:
 
-1. The app must contain two Activities. The first Activity only has one button in the middle. After clicking the button, the camera starts and the user takes a picture. The returned picture must be passed to the second Activity. The picture must be a full resolution picture (depends on the resolution of the camera), not the thumbnail.
+1. (IMPLEMENTED) The app must contain two Activities. The first Activity only has one button in the middle. After clicking the button, the camera starts and the user takes a picture. The returned picture must be passed to the second Activity. The picture must be a full resolution picture (depends on the resolution of the camera), not the thumbnail.
 
-2. The second activity shows the received picture. At the bottom of the screen, there must be 6 buttons. The three buttons on the top show the three colors of the paint. The buttons in the bottom row are undo, clear and done buttons.
+2. (IMPLEMENTED) The second activity shows the received picture. At the bottom of the screen, there must be 6 buttons. The three buttons on the top show the three colors of the paint. The buttons in the bottom row are undo, clear and done buttons.
 
 3. The second activity must support multi-touch drawing. After the user selects the paint color, touches and moves the finger on the screen, the app must draw the trace of the finger movement on top of the picture, with the stroke of selected color. The traces must follow user’s fingers in real-time, without significant delay. The app must enable single touch drawing, as well as multi-touch drawing (show multiple lines while user moves multiple fingers on the screen).
 
