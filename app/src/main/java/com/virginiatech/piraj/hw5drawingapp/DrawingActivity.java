@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 /**
  * Activity where the actual drawing happens
  */
 
 public class DrawingActivity extends AppCompatActivity {
+
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,10 @@ public class DrawingActivity extends AppCompatActivity {
         Uri imageURI = Uri.parse(extras.getString("imageURI"));
 
         System.out.println("DrawingActivity: image URI received " + imageURI.toString()); //Just for testing
+
+        imageView = (ImageView) findViewById(R.id.testImageView);
+
+        imageView.setImageURI(imageURI);
 
     }
 }
