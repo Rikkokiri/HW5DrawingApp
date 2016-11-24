@@ -1,6 +1,6 @@
-# HW5DrawingApp
+## HW5DrawingApp
 
-##Instructions and requirements for the app:
+#Instructions and requirements for the app:
 
 This homework exercises your abilities to fetch a picture from the camera, handle the multitouch event and use Canvas to create a customized image. The core tasks ask that you appropriately use camera, OnTouchListener and Canvas to take a picture, and use the multi-touch to paint on the picture. The application to be developed is a picture-painting app: user takes a picture with a camera first, and draws lines and icons on the picture with multi-touch and gestures. The requirements are:
 
@@ -17,14 +17,14 @@ This homework exercises your abilities to fetch a picture from the camera, handl
 6. After the user finishes editing, the user returns to the first Activity by clicking the Done button. The app must allow the user to take another picture, and paint it again.
 
 
-##Bonus requirements (for bonus points!):
+#Bonus requirements (for bonus points!):
 
 1. The undo will cancel the last action, which includes both line drawing and icon adding. For example, if the user draws a red line, adds a star, and then draws a green line, the order of undoing should be reversed: remove the green line, remove the star and then remove the red line.
 2. When the user touches the finger on the screen, the app plays the sound of pencil writing. Playing the sound must not block the user interaction.
 3. Adding animation to the added icons (e.g. shaking, rotating, blinking or flashing). The animation must play repeatedly while the user paints the picture, and not block the user interaction.
 4. After the user clicks done, the image with all paintings and icons is saved as a picture in the photo gallery. The picture can be viewed with the gallery app.
 
-##Rubric
+#Goal: 
 - App can take a picture and show it in the second activity 20%
 - App enables multi-touch drawing, with the selected color 20%
 - App supports adding different icons by double-tapping and long-pressing gesture 20%
@@ -32,7 +32,7 @@ This homework exercises your abilities to fetch a picture from the camera, handl
 - After finishing one picture, the user can take another picture and edit it again 10%
 - Bug free 10%
 
-##Bonus points:
+#Bonus points:
 - Animated icons 5%
 - Save to gallery 5%
 - Undo both line-drawing and icon-adding 5%
