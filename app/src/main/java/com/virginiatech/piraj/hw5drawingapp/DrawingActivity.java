@@ -34,6 +34,9 @@ public class DrawingActivity extends AppCompatActivity {
     private Button undoButton;
     private Button doneButton;
 
+    // --- TouchHandler ---
+    private TouchHandler touchHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +65,7 @@ public class DrawingActivity extends AppCompatActivity {
         greenColor.setOnClickListener(colourListener);
 
         // ----- Action buttons and listeners -----------
+
         clearButton = (Button) findViewById(R.id.clearButton);
         clearButton.setOnClickListener(clearHandler);
 
@@ -70,6 +74,11 @@ public class DrawingActivity extends AppCompatActivity {
 
         doneButton = (Button) findViewById(R.id.doneButton);
         doneButton.setOnClickListener(doneHandler);
+
+        // ----- TouchHandler -----------
+        
+        touchHandler = new TouchHandler(this); //Pass TouchHandler a reference to this activity
+        canvas.setOnTouchListener(touchHandler);
 
     }
 
@@ -133,4 +142,17 @@ public class DrawingActivity extends AppCompatActivity {
         }
     };
 
+    public void addNewPath(int id, float x, float y) {
+        //TODO
+    }
+
+    public void updatePath(int id, float x, float y) {
+        //TODO
+    }
+
+    public void removePath(int id) {
+
+        //TODO?
+
+    }
 }
