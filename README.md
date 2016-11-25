@@ -20,7 +20,7 @@ This homework exercises your abilities to fetch a picture from the camera, handl
 ##Bonus requirements (for bonus points!):
 
 1. (IMPLEMENTED) The undo will cancel the last action, which includes both line drawing and icon adding. For example, if the user draws a red line, adds a star, and then draws a green line, the order of undoing should be reversed: remove the green line, remove the star and then remove the red line.
-2. When the user touches the finger on the screen, the app plays the sound of pencil writing. Playing the sound must not block the user interaction.
+2. (IMPLEMENTED) When the user touches the finger on the screen, the app plays the sound of pencil writing. Playing the sound must not block the user interaction.
 3. Adding animation to the added icons (e.g. shaking, rotating, blinking or flashing). The animation must play repeatedly while the user paints the picture, and not block the user interaction.
 4. (IMPLEMENTED) After the user clicks done, the image with all paintings and icons is saved as a picture in the photo gallery. The picture can be viewed with the gallery app.
 
