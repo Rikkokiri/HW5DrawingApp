@@ -10,7 +10,7 @@ This homework exercises your abilities to fetch a picture from the camera, handl
 
 3. (IMPLEMENTED) The second activity must support multi-touch drawing. After the user selects the paint color, touches and moves the finger on the screen, the app must draw the trace of the finger movement on top of the picture, with the stroke of selected color. The traces must follow user’s fingers in real-time, without significant delay. The app must enable single touch drawing, as well as multi-touch drawing (show multiple lines while user moves multiple fingers on the screen).
 
-4. The app must support adding icons by double tapping and long pressing. Double tapping the screen once must add one icon. Long pressing must add another different icon. The icon must be a drawable image. E.g. a star, a hokiebird, VT logo or an avatar of your favorite cartoon character.
+4. (IMPLEMENTED) The app must support adding icons by double tapping and long pressing. Double tapping the screen once must add one icon. Long pressing must add another different icon. The icon must be a drawable image. E.g. a star, a hokiebird, VT logo or an avatar of your favorite cartoon character.
 
 5. (IMPLEMENTED) The app must support undo the drawing and clearing the canvas, by pressing the corresponding button. Pressing the undo button once will cancel the last finger drawing. Clicking the clear button will remove all the lines (Paths) and icons.
 
