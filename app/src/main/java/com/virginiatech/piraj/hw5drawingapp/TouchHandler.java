@@ -72,7 +72,8 @@ public class TouchHandler implements View.OnTouchListener {
 
                     //TODO ?
                     int id = motionEvent.getPointerId(i);
-                    drawingActivity.removePath(id);
+                    //drawingActivity.removePath(id);
+                    drawingActivity.pathDone(id);
                 }
                 break;
         }

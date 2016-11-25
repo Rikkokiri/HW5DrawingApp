@@ -4,7 +4,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 
 /**
- * Class for saving Paths 
+ * Class for saving Paths
  *
  * @author Pilvi Rajala (piraj)
  * @version 2016.11.25
@@ -21,10 +21,18 @@ public class SavedPath {
 
     public SavedPath(Path path, Paint paint){
         this(path);
-        this.paint = paint;
+        this.paint = new Paint(paint); //Create copy of the paint object
     }
 
     public void setPaint(Paint paint){
         this.paint = paint;
+    }
+
+    public Path getPath(){
+        return this.path;
+    }
+
+    public Paint getPaint(){
+        return this.paint;
     }
 }

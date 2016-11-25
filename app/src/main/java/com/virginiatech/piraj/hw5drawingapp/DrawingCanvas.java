@@ -94,7 +94,6 @@ public class DrawingCanvas extends ImageView {
         }
 
         if(path != null){
-
             path.lineTo(x, y);
         }
         //Call onDraw()
@@ -111,7 +110,7 @@ public class DrawingCanvas extends ImageView {
 
     public void pathDone(int id){
         if(activePaths.containsKey(id)){
-            drawings.put(id, activePaths.get(id));
+            drawings.put(Id.createID(), new SavedPath(activePaths.get(id), pathPaint));
             activePaths.remove(id);
         }
         invalidate();
@@ -142,11 +141,11 @@ public class DrawingCanvas extends ImageView {
         }
 
         //TODO Draw path on canvas
-        for(Object drawing : activePaths.values()){
+        for(Object drawing : drawings.values()){
 
-            if(drawing instanceof Path){
-                Path path = (Path) drawing;
-                canvas.drawPath(path, pathPaint);
+            if(drawing instanceof SavedPath){
+                SavedPath savedPath = (SavedPath) drawing;
+                canvas.drawPath(savedPath.getPath(), savedPath.getPaint());
             }
 
             /*
@@ -158,6 +157,10 @@ public class DrawingCanvas extends ImageView {
 
             }*/
 
+        }
+
+        for(Path path : activePaths.values()){
+            canvas.drawPath(path, pathPaint);
         }
 
     }

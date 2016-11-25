@@ -156,13 +156,15 @@ public class DrawingActivity extends AppCompatActivity {
     }
 
     public void updatePath(int id, float x, float y) {
-        //TODO
         canvas.updatePath(id, x, y);
     }
 
+    //TODO Remove?
     public void removePath(int id) {
-        //TODO?
         canvas.removePath(id);
     }
 
+    public void pathDone(int id){
+        canvas.pathDone(id);
+    }
 }
