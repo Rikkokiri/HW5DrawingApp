@@ -8,7 +8,7 @@ This homework exercises your abilities to fetch a picture from the camera, handl
 
 2. (IMPLEMENTED) The second activity shows the received picture. At the bottom of the screen, there must be 6 buttons. The three buttons on the top show the three colors of the paint. The buttons in the bottom row are undo, clear and done buttons.
 
-3. The second activity must support multi-touch drawing. After the user selects the paint color, touches and moves the finger on the screen, the app must draw the trace of the finger movement on top of the picture, with the stroke of selected color. The traces must follow user’s fingers in real-time, without significant delay. The app must enable single touch drawing, as well as multi-touch drawing (show multiple lines while user moves multiple fingers on the screen).
+3. (IMPLEMENTED) The second activity must support multi-touch drawing. After the user selects the paint color, touches and moves the finger on the screen, the app must draw the trace of the finger movement on top of the picture, with the stroke of selected color. The traces must follow user’s fingers in real-time, without significant delay. The app must enable single touch drawing, as well as multi-touch drawing (show multiple lines while user moves multiple fingers on the screen).
 
 4. The app must support adding icons by double tapping and long pressing. Double tapping the screen once must add one icon. Long pressing must add another different icon. The icon must be a drawable image. E.g. a star, a hokiebird, VT logo or an avatar of your favorite cartoon character.
 
