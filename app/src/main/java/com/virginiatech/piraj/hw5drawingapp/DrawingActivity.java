@@ -99,7 +99,6 @@ public class DrawingActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             canvas.clearCanvas();
-            canvas.setImageURI(imageURI);
         }
     };
 

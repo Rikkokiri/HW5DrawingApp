@@ -1,28 +1,18 @@
 package com.virginiatech.piraj.hw5drawingapp;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.widget.ImageView;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map.Entry;
-
-import static android.R.attr.width;
-import static com.virginiatech.piraj.hw5drawingapp.R.attr.height;
 
 /**
  * TODO Javadoc
@@ -46,9 +36,7 @@ public class DrawingCanvas extends ImageView {
 
     private Drawable iconLongPress;
     private Drawable iconDoubleTap;
-
-    private boolean clearCanvas;
-
+    
     /**
      * Constructor
      */
@@ -58,19 +46,15 @@ public class DrawingCanvas extends ImageView {
         this.drawings = new LinkedHashMap<Integer, Object>();
         this.activePaths = new LinkedHashMap<Integer, Path>();
 
-        clearCanvas = false;
-
-        //Create paint
+        // --- Paint ---
         pathPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         pathPaint.setColor(Color.BLUE);
         pathPaint.setStyle(Paint.Style.STROKE);
         pathPaint.setStrokeWidth(40); //dp
 
+        // --- Icons ---
         iconLongPress = ResourcesCompat.getDrawable(getResources(), R.drawable.flaming_bottle, null);
-        //iconLongPress.setBounds(0, 0, iconLongPress.getIntrinsicWidth(), iconLongPress.getIntrinsicHeight());
-
         iconDoubleTap = ResourcesCompat.getDrawable(getResources(), R.drawable.gun, null);
-        //iconDoubleTap.setBounds(0, 0, iconDoubleTap.getIntrinsicWidth(), iconDoubleTap.getIntrinsicHeight());
 
     }
 
@@ -193,7 +177,8 @@ public class DrawingCanvas extends ImageView {
      * Clear canvas
      */
     public void clearCanvas(){
-        this.clearCanvas = true;
+        activePaths.clear();
+        drawings.clear();
         invalidate();
     }
 
@@ -205,13 +190,6 @@ public class DrawingCanvas extends ImageView {
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
-
-        //Clear canvas
-        if(clearCanvas){
-            clearCanvas = false;
-            activePaths.clear();
-            drawings.clear();
-        }
 
         for(Object drawing : drawings.values()){
 
