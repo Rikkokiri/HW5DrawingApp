@@ -112,11 +112,12 @@ public class TouchHandler implements View.OnTouchListener {
         @Override
         public void onLongPress(MotionEvent event){
 
-            System.out.println("****** LONG PRESS ******");
-
+            //System.out.println("****** LONG PRESS ******");
+            drawingActivity.drawLongPressIcon(event.getX(), event.getY());
+            /*
             for(int i = 0, size = event.getPointerCount(); i < size; i++){
                 drawingActivity.drawLongPressIcon(event.getX(i), event.getY(i));
-            }
+            }*/
 
             super.onLongPress(event);
         }
@@ -124,11 +125,14 @@ public class TouchHandler implements View.OnTouchListener {
         @Override
         public boolean onDoubleTap(MotionEvent event){
 
-            System.out.println("****** DOUBLE TAP ******");
+            //System.out.println("****** DOUBLE TAP ******");
 
+            drawingActivity.drawDoubleTapIcon(event.getX(), event.getY());
+            
+            /*
             for(int i = 0, size = event.getPointerCount(); i < size; i++){
                 drawingActivity.drawDoubleTapIcon(event.getX(i), event.getY(i));
-            }
+            }*/
 
             return super.onDoubleTap(event);
         }

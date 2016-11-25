@@ -159,21 +159,37 @@ public class DrawingActivity extends AppCompatActivity {
         canvas.updatePath(id, x, y);
     }
 
-    //TODO Remove?
-    public void removePath(int id) {
-        canvas.removePath(id);
-    }
-
+    /**
+     * User finished drawing a path
+     *
+     * @param id Id of the path the user finished drawing
+     */
     public void pathDone(int id){
         canvas.pathDone(id);
     }
 
+    /**
+     * TODO Javadoc
+     *
+     * @param posX
+     * @param posY
+     */
     public void drawDoubleTapIcon(float posX, float posY){
         canvas.drawDoubleTapIcon(posX, posY);
     }
 
+    /**
+     * TODO Javadoc
+     *
+     * @param posX
+     * @param posY
+     */
     public void drawLongPressIcon(float posX, float posY){
         canvas.drawLongPressIcon(posX, posY);
+    }
+
+    public void removeLastPath(){
+        canvas.removeLastPath();
     }
 
 }

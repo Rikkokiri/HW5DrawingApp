@@ -14,8 +14,12 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map.Entry;
 
 import static android.R.attr.width;
 import static com.virginiatech.piraj.hw5drawingapp.R.attr.height;
@@ -63,10 +67,10 @@ public class DrawingCanvas extends ImageView {
         pathPaint.setStrokeWidth(40); //dp
 
         iconLongPress = ResourcesCompat.getDrawable(getResources(), R.drawable.flaming_bottle, null);
-        iconLongPress.setBounds(0, 0, iconLongPress.getIntrinsicWidth(), iconLongPress.getIntrinsicHeight());
+        //iconLongPress.setBounds(0, 0, iconLongPress.getIntrinsicWidth(), iconLongPress.getIntrinsicHeight());
 
         iconDoubleTap = ResourcesCompat.getDrawable(getResources(), R.drawable.gun, null);
-        iconDoubleTap.setBounds(0, 0, iconDoubleTap.getIntrinsicWidth(), iconDoubleTap.getIntrinsicHeight());
+        //iconDoubleTap.setBounds(0, 0, iconDoubleTap.getIntrinsicWidth(), iconDoubleTap.getIntrinsicHeight());
 
     }
 
@@ -106,19 +110,11 @@ public class DrawingCanvas extends ImageView {
         invalidate();
     }
 
-    public void removePath(int id){
-        if(activePaths.containsKey(id)){
-            //activePaths.remove(id);
-        }
-        //Call onDraw()
-        invalidate();
-    }
-
     /**
-     * TODO Javadoc
+     * Remove the most recent drawing
      */
     public void undoDraw(){
-        Iterator<Object> iterator = drawings.values().iterator();
+
         Integer lastID = null;
 
         for(Integer id : drawings.keySet()){
@@ -126,9 +122,10 @@ public class DrawingCanvas extends ImageView {
         }
         //Remove the last added drawing
         if(lastID != null){
+            System.out.println("Undo " + drawings.get(lastID).toString());
             drawings.remove(lastID);
         }
-        
+
         //Call onDraw()
         invalidate();
     }
@@ -141,17 +138,42 @@ public class DrawingCanvas extends ImageView {
     public void pathDone(int id){
         if(activePaths.containsKey(id)){
             drawings.put(Id.createID(), new SavedPath(activePaths.get(id), pathPaint));
+
+            System.out.println("Finished path " + activePaths.get(id).toString());
+
             activePaths.remove(id);
         }
         invalidate();
     }
 
+    public void removeLastPath(){
+
+        List<Entry<Integer,Object>> list = new ArrayList<>(drawings.entrySet());
+
+        for( int i = list.size() -1; i >= 0 ; i --){
+            Entry<Integer,Object> entry = list.get(i);
+
+            if(entry.getValue() instanceof SavedPath){
+                System.out.println("Remove path " + entry.toString());
+                drawings.remove(entry.getKey());
+                break;
+            }
+        }
+    }
+
     public void drawDoubleTapIcon(float posX, float posY){
+        //Remove two invisible paths
+        //removeLastPath();
+
+        //Then draw the icon
         drawIcon(iconDoubleTap, posX, posY);
+        invalidate();
     }
 
     public void drawLongPressIcon(float posX, float posY){
+        //Then draw icon
         drawIcon(iconLongPress, posX, posY);
+        invalidate();
     }
 
     /**
@@ -162,8 +184,9 @@ public class DrawingCanvas extends ImageView {
      * @param posY
      */
     private void drawIcon(Drawable drawable, float posX, float posY){
-        drawings.put(Id.createID(), new SavedDrawable(drawable, posX, posY));
-        invalidate();
+        System.out.println("Draw icon " + drawable.toString() + "to X: " + posX + " and Y: "  + posY);
+
+        drawings.put(new Integer(Id.createID()), new SavedDrawable(drawable, posX, posY));
     }
 
     /**
@@ -192,26 +215,26 @@ public class DrawingCanvas extends ImageView {
 
         for(Object drawing : drawings.values()){
 
-            //Draw saved paths on canvas
-            if(drawing instanceof SavedPath){
-                SavedPath savedPath = (SavedPath) drawing;
-                canvas.drawPath(savedPath.getPath(), savedPath.getPaint());
-            }
-
             //Draw icon (Drawable) on canvas
             if(drawing instanceof SavedDrawable){
                 SavedDrawable drawable = (SavedDrawable) drawing;
 
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.flaming_bottle);
-                canvas.drawBitmap(bitmap, drawable.getX(), drawable.getY(), null);
+                Drawable icon = drawable.getIcon();
+                icon.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
 
-                /*
+                float x = drawable.getX() - (float)(icon.getIntrinsicWidth() / 2.0);
+                float y = drawable.getY() - (float)(icon.getIntrinsicHeight() / 2.0);
+
                 canvas.save();
-                canvas.translate(drawable.getX(), drawable.getY());
-                drawable.getIcon().draw(canvas);
+                canvas.translate(x, y);
+                icon.draw(canvas);
                 canvas.restore();
-                */
+            }
 
+            //Draw saved paths on canvas
+            if(drawing instanceof SavedPath){
+                SavedPath savedPath = (SavedPath) drawing;
+                canvas.drawPath(savedPath.getPath(), savedPath.getPaint());
             }
 
         }

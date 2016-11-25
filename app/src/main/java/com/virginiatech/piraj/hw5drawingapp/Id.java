@@ -3,6 +3,7 @@ package com.virginiatech.piraj.hw5drawingapp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 
 /**
  * Class for creating unique ID values
@@ -12,9 +13,11 @@ import java.util.Locale;
  */
 public class Id {
 
+    private static Random rnd = new Random();
+
     public static int createID(){
         Date now = new Date();
-        int id = Integer.parseInt(new SimpleDateFormat("ddHHmmss",  Locale.US).format(now));
+        int id = rnd.nextInt(100) * Integer.parseInt(new SimpleDateFormat("ddHHmmss",  Locale.US).format(now));
         return id;
     }
 }
