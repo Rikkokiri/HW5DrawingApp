@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -121,6 +122,8 @@ public class DrawingActivity extends AppCompatActivity {
 
     /**
      * OnClickListener for done button
+     * When done button is pressed the image is saved on the phone and user will be taken back to
+     * the StartActivity where user can start the whole picture taking and drawing process all over again.
      */
     private View.OnClickListener doneHandler = new View.OnClickListener(){
         @Override
@@ -128,8 +131,14 @@ public class DrawingActivity extends AppCompatActivity {
             try {
                 canvas.saveDrawing(appDirectory);
 
+                Toast.makeText(DrawingActivity.this, "Drawing was saved to folder " + appDirectory.toString(), Toast.LENGTH_LONG).show();
+
+                //Return to the StartActivity
+                Intent returnIntent = new Intent(view.getContext(), StartActivity.class);
+                startActivity(returnIntent);
+
             } catch (FileNotFoundException e) {
-                //TODO Saving drawing failed
+                Toast.makeText(DrawingActivity.this, "Error saving the picture", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }
