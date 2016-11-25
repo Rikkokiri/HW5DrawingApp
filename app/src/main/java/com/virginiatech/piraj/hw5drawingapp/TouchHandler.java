@@ -42,26 +42,26 @@ public class TouchHandler implements View.OnTouchListener {
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
-        int maskedAction = motionEvent.getActionMasked();
+        int action = motionEvent.getAction();
 
         //Added in step 4/5
         gestureDetectorCompat.onTouchEvent(motionEvent);
 
-        switch(maskedAction){
+        switch(action & MotionEvent.ACTION_MASK){
             //This two cases will result into the same action
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN:
                 //How many touch points the user activated? Multi-touch or single touch?
                 for(int i = 0, size = motionEvent.getPointerCount(); i < size; i++){
                     int id = motionEvent.getPointerId(i);
-                    drawingActivity.addNewPath(id, motionEvent.getX(), motionEvent.getY());
+                    drawingActivity.addNewPath(id, motionEvent.getX(i), motionEvent.getY(i));
                 }
                 break;
 
             case MotionEvent.ACTION_MOVE:
                 for(int i = 0, size = motionEvent.getPointerCount(); i < size; i++){
                     int id = motionEvent.getPointerId(i);
-                    drawingActivity.updatePath(id, motionEvent.getX(), motionEvent.getY());
+                    drawingActivity.updatePath(id, motionEvent.getX(i), motionEvent.getY(i));
                 }
                 break;
 

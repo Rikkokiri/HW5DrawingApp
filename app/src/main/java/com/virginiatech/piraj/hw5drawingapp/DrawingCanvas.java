@@ -1,8 +1,6 @@
 package com.virginiatech.piraj.hw5drawingapp;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,6 +22,7 @@ import java.util.LinkedHashMap;
 public class DrawingCanvas extends ImageView {
 
     private Paint pathPaint;
+    
     /**
      * Type Object is used so that both Drawable and Path objects can be stored in the map
      */
