@@ -19,6 +19,8 @@ public class DrawingActivity extends AppCompatActivity {
 
     private DrawingCanvas canvas;
 
+    private Uri imageURI;
+
     // --- Color Buttons ---
     private Button redColor;
     private Button blueColor;
@@ -49,7 +51,7 @@ public class DrawingActivity extends AppCompatActivity {
 
         //Get the image URI from the intent
         Bundle extras = imageIntent.getExtras();
-        Uri imageURI = Uri.parse(extras.getString("imageURI"));
+        imageURI = Uri.parse(extras.getString("imageURI"));
 
         //Set the image as the background of the canvas
         canvas.setImageURI(imageURI);
@@ -96,7 +98,8 @@ public class DrawingActivity extends AppCompatActivity {
     private View.OnClickListener clearHandler = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            canvas.clearCanvas();
+            canvas.setImageURI(imageURI);
         }
     };
 
@@ -159,7 +162,7 @@ public class DrawingActivity extends AppCompatActivity {
 
     public void removePath(int id) {
         //TODO?
-        removePath(id);
+        canvas.removePath(id);
     }
 
 }

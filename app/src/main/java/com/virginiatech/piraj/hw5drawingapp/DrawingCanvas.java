@@ -5,12 +5,17 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import java.util.LinkedHashMap;
+
+import static android.R.attr.width;
+import static com.virginiatech.piraj.hw5drawingapp.R.attr.height;
 
 /**
  * TODO Javadoc
@@ -27,10 +32,15 @@ public class DrawingCanvas extends ImageView {
      * Type Object is used so that both Drawable and Path objects can be stored in the map
      */
     private LinkedHashMap<Integer, Object> drawings;
+    /**
+     * LinkedHashMap for storing paths that are being drawn
+     */
+    private LinkedHashMap<Integer, Path> activePaths;
 
     private Drawable iconLongPress;
     private Drawable iconDoubleTap;
 
+    private boolean clearCanvas;
 
     /**
      * Constructor
@@ -39,6 +49,9 @@ public class DrawingCanvas extends ImageView {
         super(context, attributeSet);
 
         this.drawings = new LinkedHashMap<Integer, Object>();
+        this.activePaths = new LinkedHashMap<Integer, Path>();
+
+        clearCanvas = false;
 
         //Create paint
         pathPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -64,7 +77,7 @@ public class DrawingCanvas extends ImageView {
     public void addPath(int id, float x, float y){
         Path path = new Path();
         path.moveTo(x, y);
-        drawings.put(id, path);
+        activePaths.put(id, path);
 
         //Call onDraw()
         invalidate();
@@ -76,8 +89,8 @@ public class DrawingCanvas extends ImageView {
     public void updatePath(int id, float x, float y){
         Path path = null;
 
-        if(drawings.get(id) instanceof Path){
-            path = (Path) drawings.get(id);
+        if(activePaths.get(id) instanceof Path){ //TODO Remove check?
+            path = (Path) activePaths.get(id);
         }
 
         if(path != null){
@@ -89,24 +102,49 @@ public class DrawingCanvas extends ImageView {
     }
 
     public void removePath(int id){
-        if(drawings.containsKey(id)){
-            drawings.remove(id);
+        if(activePaths.containsKey(id)){
+            //activePaths.remove(id);
         }
         //Call onDraw()
         invalidate();
     }
 
+    public void pathDone(int id){
+        if(activePaths.containsKey(id)){
+            drawings.put(id, activePaths.get(id));
+            activePaths.remove(id);
+        }
+        invalidate();
+    }
+
+    /**
+     * Clear canvas
+     */
+    public void clearCanvas(){
+        this.clearCanvas = true;
+        invalidate();
+    }
+
+    /**
+     * TODO Javadoc
+     *
+     * @param canvas
+     */
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
 
+        //Clear canvas
+        if(clearCanvas){
+            clearCanvas = false;
+            activePaths.clear();
+            drawings.clear();
+        }
 
         //TODO Draw path on canvas
-        for(Object drawing : drawings.values()){
+        for(Object drawing : activePaths.values()){
 
             if(drawing instanceof Path){
-                System.out.println("Draw path!");
-
                 Path path = (Path) drawing;
                 canvas.drawPath(path, pathPaint);
             }
@@ -120,9 +158,6 @@ public class DrawingCanvas extends ImageView {
 
             }*/
 
-
-            //Make the change happen immediately?
-            //invalidate();
         }
 
     }
