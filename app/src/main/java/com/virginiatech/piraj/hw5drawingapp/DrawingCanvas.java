@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PathMeasure;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
@@ -36,7 +37,7 @@ public class DrawingCanvas extends ImageView {
 
     private Drawable iconLongPress;
     private Drawable iconDoubleTap;
-    
+
     /**
      * Constructor
      */
@@ -120,11 +121,16 @@ public class DrawingCanvas extends ImageView {
      * @param id Id value of the finished path
      */
     public void pathDone(int id){
+
         if(activePaths.containsKey(id)){
-            drawings.put(Id.createID(), new SavedPath(activePaths.get(id), pathPaint));
 
-            System.out.println("Finished path " + activePaths.get(id).toString());
+            PathMeasure pm = new PathMeasure(activePaths.get(id), false);
 
+            //Check that something was actually drawn before adding the path
+            if(pm.getLength() > 1) {
+                drawings.put(Id.createID(), new SavedPath(activePaths.get(id), pathPaint));
+                System.out.println("Finished path " + activePaths.get(id).toString());
+            }
             activePaths.remove(id);
         }
         invalidate();
