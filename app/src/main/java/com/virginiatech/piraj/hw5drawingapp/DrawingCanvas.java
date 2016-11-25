@@ -60,6 +60,8 @@ public class DrawingCanvas extends ImageView {
         pathPaint.setStrokeWidth(40); //dp
 
         iconLongPress = ResourcesCompat.getDrawable(getResources(), R.drawable.flaming_bottle, null);
+        //iconLongPress.setBounds(0, 0, iconLongPress.getIntrinsicWidth(), iconLongPress.getIntrinsicHeight());
+
         iconDoubleTap = ResourcesCompat.getDrawable(getResources(), R.drawable.gun, null);
 
     }
@@ -108,11 +110,23 @@ public class DrawingCanvas extends ImageView {
         invalidate();
     }
 
+    /**
+     * Save the path once user stops drawing it.
+     *
+     * @param id Id value of the finished path
+     */
     public void pathDone(int id){
         if(activePaths.containsKey(id)){
             drawings.put(Id.createID(), new SavedPath(activePaths.get(id), pathPaint));
             activePaths.remove(id);
         }
+        invalidate();
+    }
+
+    public void drawIcon(){
+
+        //TODO
+
         invalidate();
     }
 
@@ -148,14 +162,19 @@ public class DrawingCanvas extends ImageView {
                 canvas.drawPath(savedPath.getPath(), savedPath.getPaint());
             }
 
-            /*
-            if(drawing instanceof Drawable){
-                Drawable drawable = (Drawable) drawing;
+
+            if(drawing instanceof SavedDrawable){
+                SavedDrawable drawable = (SavedDrawable) drawing;
 
                 //Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
                 //canvas.drawBitmap(bitmap, x, y, null);
 
-            }*/
+                canvas.save();
+                canvas.translate(drawable.getX(), drawable.getY());
+                drawable.getIcon().draw(canvas);
+                canvas.restore();
+
+            }
 
         }
 
