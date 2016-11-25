@@ -50,11 +50,14 @@ public class TouchHandler implements View.OnTouchListener {
             //This two cases will result into the same action
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN:
+
                 //How many touch points the user activated? Multi-touch or single touch?
                 for(int i = 0, size = motionEvent.getPointerCount(); i < size; i++){
                     int id = motionEvent.getPointerId(i);
                     drawingActivity.addNewPath(id, motionEvent.getX(i), motionEvent.getY(i));
                 }
+                drawingActivity.playSound();
+
                 break;
 
             case MotionEvent.ACTION_MOVE:
@@ -67,10 +70,13 @@ public class TouchHandler implements View.OnTouchListener {
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_CANCEL:
+
                 for(int i = 0, size = motionEvent.getPointerCount(); i < size; i++){
                     int id = motionEvent.getPointerId(i);
                     drawingActivity.pathDone(id);
                 }
+                drawingActivity.stopSound();
+
                 break;
         }
 
@@ -102,6 +108,8 @@ public class TouchHandler implements View.OnTouchListener {
          */
         @Override
         public void onLongPress(MotionEvent event){
+
+            drawingActivity.stopSound();
 
             drawingActivity.drawLongPressIcon(event.getX(), event.getY());
             super.onLongPress(event);

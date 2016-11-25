@@ -22,9 +22,11 @@ public class SoundPlayer {
     private float mediaVolume;
 
     private AudioManager audioManager;
-
+    private Activity activity;
 
     public SoundPlayer(Activity activity){
+
+        this.activity = activity;
 
         // AudioManager audio settings for adjusting the volume
         audioManager = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
@@ -75,6 +77,7 @@ public class SoundPlayer {
     public void pauseSound() {
         if (soundPlaying) {
             soundpool.pause(soundID);
+            soundID = soundpool.load(activity, R.raw.pencilsound, 1);
             soundPlaying = false;
         }
     }
@@ -85,6 +88,7 @@ public class SoundPlayer {
     public void stopSound() {
         if (soundPlaying) {
             soundpool.stop(soundID);
+            soundID = soundpool.load(activity, R.raw.pencilsound, 1);
             soundPlaying = false;
         }
     }

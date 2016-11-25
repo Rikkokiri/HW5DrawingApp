@@ -50,6 +50,9 @@ public class DrawingActivity extends AppCompatActivity {
     // --- TouchHandler ---
     private TouchHandler touchHandler;
 
+    // --- SoundPlayer ---
+    private SoundPlayer soundPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +97,9 @@ public class DrawingActivity extends AppCompatActivity {
         // ----- TouchHandler -----------
         touchHandler = new TouchHandler(this); //Pass TouchHandler a reference to this activity
         canvas.setOnTouchListener(touchHandler);
+
+        // ----- SoundPlayer ------------
+        soundPlayer = new SoundPlayer(this);
 
     }
 
@@ -226,6 +232,20 @@ public class DrawingActivity extends AppCompatActivity {
      */
     public void drawLongPressIcon(float posX, float posY){
         canvas.drawLongPressIcon(posX, posY);
+    }
+
+    // <o>-<o>-<o>-<o>-<o>-<o> HANDLE SOUND EFFECTS <o>-<o>-<o>-<o>-<o>-<o>
+
+    public void playSound(){
+        soundPlayer.playSound();
+    }
+
+    public void pauseSound(){
+        soundPlayer.pauseSound();
+    }
+
+    public void stopSound(){
+        soundPlayer.stopSound();
     }
 
 }
