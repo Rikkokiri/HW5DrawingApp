@@ -12,7 +12,7 @@ This homework exercises your abilities to fetch a picture from the camera, handl
 
 4. The app must support adding icons by double tapping and long pressing. Double tapping the screen once must add one icon. Long pressing must add another different icon. The icon must be a drawable image. E.g. a star, a hokiebird, VT logo or an avatar of your favorite cartoon character.
 
-5. The app must support undo the drawing and clearing the canvas, by pressing the corresponding button. Pressing the undo button once will cancel the last finger drawing. Clicking the clear button will remove all the lines (Paths) and icons.
+5. (IMPLEMENTED) The app must support undo the drawing and clearing the canvas, by pressing the corresponding button. Pressing the undo button once will cancel the last finger drawing. Clicking the clear button will remove all the lines (Paths) and icons.
 
 6. After the user finishes editing, the user returns to the first Activity by clicking the Done button. The app must allow the user to take another picture, and paint it again.
 
