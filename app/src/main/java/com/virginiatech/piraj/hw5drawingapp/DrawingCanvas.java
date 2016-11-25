@@ -107,7 +107,6 @@ public class DrawingCanvas extends ImageView {
         }
         //Remove the last added drawing
         if(lastID != null){
-            System.out.println("Undo " + drawings.get(lastID).toString());
             drawings.remove(lastID);
         }
 
@@ -129,39 +128,30 @@ public class DrawingCanvas extends ImageView {
             //Check that something was actually drawn before adding the path
             if(pm.getLength() > 1) {
                 drawings.put(Id.createID(), new SavedPath(activePaths.get(id), pathPaint));
-                System.out.println("Finished path " + activePaths.get(id).toString());
             }
             activePaths.remove(id);
         }
         invalidate();
     }
 
-    public void removeLastPath(){
-
-        List<Entry<Integer,Object>> list = new ArrayList<>(drawings.entrySet());
-
-        for( int i = list.size() -1; i >= 0 ; i --){
-            Entry<Integer,Object> entry = list.get(i);
-
-            if(entry.getValue() instanceof SavedPath){
-                System.out.println("Remove path " + entry.toString());
-                drawings.remove(entry.getKey());
-                break;
-            }
-        }
-    }
-
+    /**
+     * Draw icon on double tap
+     *
+     * @param posX
+     * @param posY
+     */
     public void drawDoubleTapIcon(float posX, float posY){
-        //Remove two invisible paths
-        //removeLastPath();
-
-        //Then draw the icon
         drawIcon(iconDoubleTap, posX, posY);
         invalidate();
     }
 
+    /**
+     * Draw icon on long press
+     *
+     * @param posX
+     * @param posY
+     */
     public void drawLongPressIcon(float posX, float posY){
-        //Then draw icon
         drawIcon(iconLongPress, posX, posY);
         invalidate();
     }
@@ -174,8 +164,6 @@ public class DrawingCanvas extends ImageView {
      * @param posY
      */
     private void drawIcon(Drawable drawable, float posX, float posY){
-        System.out.println("Draw icon " + drawable.toString() + "to X: " + posX + " and Y: "  + posY);
-
         drawings.put(new Integer(Id.createID()), new SavedDrawable(drawable, posX, posY));
     }
 

@@ -187,8 +187,4 @@ public class DrawingActivity extends AppCompatActivity {
         canvas.drawLongPressIcon(posX, posY);
     }
 
-    public void removeLastPath(){
-        canvas.removeLastPath();
-    }
-
 }

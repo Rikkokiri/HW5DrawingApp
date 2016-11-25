@@ -44,7 +44,6 @@ public class TouchHandler implements View.OnTouchListener {
 
         int action = motionEvent.getAction();
 
-        //Added in step 4/5
         gestureDetectorCompat.onTouchEvent(motionEvent);
 
         switch(action & MotionEvent.ACTION_MASK){
@@ -69,17 +68,12 @@ public class TouchHandler implements View.OnTouchListener {
             case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_CANCEL:
                 for(int i = 0, size = motionEvent.getPointerCount(); i < size; i++){
-
-                    //TODO ?
                     int id = motionEvent.getPointerId(i);
-                    //drawingActivity.removePath(id);
                     drawingActivity.pathDone(id);
                 }
                 break;
         }
 
-
-        //TODO Explain
         return true;
     }
 
@@ -101,31 +95,22 @@ public class TouchHandler implements View.OnTouchListener {
         }
 
         /*
-         * TODO onLongPress and onDoubleTap
-         *
          * The app must support adding icons by double tapping and long pressing.
          * Double tapping the screen once must add one icon. Long pressing must add another different icon.
          * The icon must be a drawable image. E.g. a star, a hokiebird, VT logo or
          * an avatar of your favorite cartoon character.
          */
-
         @Override
         public void onLongPress(MotionEvent event){
 
-            //System.out.println("****** LONG PRESS ******");
             drawingActivity.drawLongPressIcon(event.getX(), event.getY());
-
-
             super.onLongPress(event);
         }
 
         @Override
         public boolean onDoubleTap(MotionEvent event){
 
-            //System.out.println("****** DOUBLE TAP ******");
             drawingActivity.drawDoubleTapIcon(event.getX(), event.getY());
-
-
             return super.onDoubleTap(event);
         }
     }
