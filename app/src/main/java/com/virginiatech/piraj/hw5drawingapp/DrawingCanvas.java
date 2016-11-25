@@ -11,19 +11,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map.Entry;
 
 /**
  * TODO Javadoc
@@ -190,18 +185,12 @@ public class DrawingCanvas extends ImageView {
     }
 
     /**
-     * Save drawing
+     * Return bitmap of the drawing (for saving the drawing)
+     *
+     * @return Bitmap of the drawing
      */
-    public void saveDrawing(String directoryPath) throws FileNotFoundException {
-
-        File storageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "HW5DrawingApp");
-
-        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        FileOutputStream fileOutputStream = new FileOutputStream(directoryPath + File.separator + "IMG_" + timestamp + ".jpg");
-
-        getDrawingCache().compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-
+    public Bitmap getDrawing(){
+        return getDrawingCache();
     }
 
     /**

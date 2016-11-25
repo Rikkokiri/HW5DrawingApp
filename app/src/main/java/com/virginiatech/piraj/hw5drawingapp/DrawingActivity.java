@@ -1,8 +1,11 @@
 package com.virginiatech.piraj.hw5drawingapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +14,9 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Activity where the actual drawing happens
@@ -129,9 +135,22 @@ public class DrawingActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             try {
-                canvas.saveDrawing(appDirectory);
+                //canvas.saveDrawing(appDirectory);
 
-                Toast.makeText(DrawingActivity.this, "Drawing was saved to folder " + appDirectory.toString(), Toast.LENGTH_LONG).show();
+                Bitmap drawingBitmap = canvas.getDrawing();
+
+                String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                FileOutputStream fileOutputStream = new FileOutputStream(appDirectory + File.separator + "IMG_" + timestamp + ".jpg");
+
+                drawingBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+
+                File storageDir = new File(Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_PICTURES), "HW5DrawingApp");
+
+                //Add image to the gallery as well
+                MediaStore.Images.Media.insertImage(getContentResolver(), drawingBitmap, "Drawing"+timestamp+".JPG", "HW5DrawingApp drawing");
+
+                Toast.makeText(DrawingActivity.this, "Drawing was saved to your gallery", Toast.LENGTH_LONG).show();
 
                 //Return to the StartActivity
                 Intent returnIntent = new Intent(view.getContext(), StartActivity.class);
