@@ -7,7 +7,7 @@ import android.graphics.Path;
  * Class for saving Paths
  *
  * @author Pilvi Rajala (piraj)
- * @version 2016.11.25
+ * @version 2016.11.24
  */
 
 public class SavedPath {

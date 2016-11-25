@@ -8,7 +8,7 @@ import java.util.Locale;
  * Class for creating unique ID values
  *
  * @author Pilvi Rajala (piraj)
- * @version 2016.11.25
+ * @version 2016.11.24
  */
 public class Id {
 
