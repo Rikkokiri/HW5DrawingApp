@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 /**
  * Activity where the actual drawing happens
  *
@@ -20,6 +23,7 @@ public class DrawingActivity extends AppCompatActivity {
     private DrawingCanvas canvas;
 
     private Uri imageURI;
+    private String appDirectory;
 
     // --- Color Buttons ---
     private Button redColor;
@@ -55,6 +59,9 @@ public class DrawingActivity extends AppCompatActivity {
 
         //Set the image as the background of the canvas
         canvas.setImageURI(imageURI);
+
+        //Get filepath for the directory used to store the images
+        appDirectory = extras.getString("app_directory");
 
         // ----- Colour buttons and listeners -----------
 
@@ -118,7 +125,13 @@ public class DrawingActivity extends AppCompatActivity {
     private View.OnClickListener doneHandler = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
+            try {
+                canvas.saveDrawing(appDirectory);
 
+            } catch (FileNotFoundException e) {
+                //TODO Saving drawing failed
+                e.printStackTrace();
+            }
         }
     };
 

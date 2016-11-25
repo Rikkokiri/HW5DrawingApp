@@ -30,8 +30,14 @@ public class StartActivity extends AppCompatActivity {
     private Button takePictureButton;
     private Uri imageURI;
 
+    /**
+     * Storage directory
+     */
+    private File storageDir;
+
     private final int TAKE_PHOTO_CODE = 666;
     private final static String IMAGE_INTENT = "imageURI";
+    private final static String APP_DIRECTORY = "app_directory";
 
     /*
      * <o><o><o><o><o><o> OnCreate <o><o><o><o><o><o>
@@ -99,6 +105,7 @@ public class StartActivity extends AppCompatActivity {
 
             //Pass the URI saved to imageFile to the activity
             startDrawingIntent.putExtra(IMAGE_INTENT, imageURI.toString());
+            startDrawingIntent.putExtra(APP_DIRECTORY, storageDir.toString());
 
             //Start the DrawingActivity
             startActivity(startDrawingIntent);
@@ -115,7 +122,7 @@ public class StartActivity extends AppCompatActivity {
      */
     private File createImageFile(){
 
-        File storageDir = new File(Environment.getExternalStoragePublicDirectory(
+        storageDir = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), "HW5DrawingApp");
 
         if(!storageDir.exists()){

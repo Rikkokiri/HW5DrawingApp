@@ -1,16 +1,26 @@
 package com.virginiatech.piraj.hw5drawingapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.graphics.drawable.Drawable;
+import android.os.Environment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -43,6 +53,9 @@ public class DrawingCanvas extends ImageView {
      */
     public DrawingCanvas(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
+
+        //For saving
+        setDrawingCacheEnabled(true);
 
         this.drawings = new LinkedHashMap<Integer, Object>();
         this.activePaths = new LinkedHashMap<Integer, Path>();
@@ -174,6 +187,21 @@ public class DrawingCanvas extends ImageView {
         activePaths.clear();
         drawings.clear();
         invalidate();
+    }
+
+    /**
+     * Save drawing
+     */
+    public void saveDrawing(String directoryPath) throws FileNotFoundException {
+
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "HW5DrawingApp");
+
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        FileOutputStream fileOutputStream = new FileOutputStream(directoryPath + File.separator + "IMG_" + timestamp + ".jpg");
+
+        getDrawingCache().compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+
     }
 
     /**
