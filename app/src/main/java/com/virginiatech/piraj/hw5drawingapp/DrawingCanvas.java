@@ -1,6 +1,8 @@
 package com.virginiatech.piraj.hw5drawingapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,6 +14,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import static android.R.attr.width;
@@ -60,9 +63,10 @@ public class DrawingCanvas extends ImageView {
         pathPaint.setStrokeWidth(40); //dp
 
         iconLongPress = ResourcesCompat.getDrawable(getResources(), R.drawable.flaming_bottle, null);
-        //iconLongPress.setBounds(0, 0, iconLongPress.getIntrinsicWidth(), iconLongPress.getIntrinsicHeight());
+        iconLongPress.setBounds(0, 0, iconLongPress.getIntrinsicWidth(), iconLongPress.getIntrinsicHeight());
 
         iconDoubleTap = ResourcesCompat.getDrawable(getResources(), R.drawable.gun, null);
+        iconDoubleTap.setBounds(0, 0, iconDoubleTap.getIntrinsicWidth(), iconDoubleTap.getIntrinsicHeight());
 
     }
 
@@ -111,6 +115,25 @@ public class DrawingCanvas extends ImageView {
     }
 
     /**
+     * TODO Javadoc
+     */
+    public void undoDraw(){
+        Iterator<Object> iterator = drawings.values().iterator();
+        Integer lastID = null;
+
+        for(Integer id : drawings.keySet()){
+            lastID = id;
+        }
+        //Remove the last added drawing
+        if(lastID != null){
+            drawings.remove(lastID);
+        }
+        
+        //Call onDraw()
+        invalidate();
+    }
+
+    /**
      * Save the path once user stops drawing it.
      *
      * @param id Id value of the finished path
@@ -123,10 +146,23 @@ public class DrawingCanvas extends ImageView {
         invalidate();
     }
 
-    public void drawIcon(){
+    public void drawDoubleTapIcon(float posX, float posY){
+        drawIcon(iconDoubleTap, posX, posY);
+    }
 
-        //TODO
+    public void drawLongPressIcon(float posX, float posY){
+        drawIcon(iconLongPress, posX, posY);
+    }
 
+    /**
+     * TODO Javadoc
+     *
+     * @param drawable
+     * @param posX
+     * @param posY
+     */
+    private void drawIcon(Drawable drawable, float posX, float posY){
+        drawings.put(Id.createID(), new SavedDrawable(drawable, posX, posY));
         invalidate();
     }
 
@@ -154,30 +190,33 @@ public class DrawingCanvas extends ImageView {
             drawings.clear();
         }
 
-        //TODO Draw path on canvas
         for(Object drawing : drawings.values()){
 
+            //Draw saved paths on canvas
             if(drawing instanceof SavedPath){
                 SavedPath savedPath = (SavedPath) drawing;
                 canvas.drawPath(savedPath.getPath(), savedPath.getPaint());
             }
 
-
+            //Draw icon (Drawable) on canvas
             if(drawing instanceof SavedDrawable){
                 SavedDrawable drawable = (SavedDrawable) drawing;
 
-                //Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
-                //canvas.drawBitmap(bitmap, x, y, null);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.flaming_bottle);
+                canvas.drawBitmap(bitmap, drawable.getX(), drawable.getY(), null);
 
+                /*
                 canvas.save();
                 canvas.translate(drawable.getX(), drawable.getY());
                 drawable.getIcon().draw(canvas);
                 canvas.restore();
+                */
 
             }
 
         }
 
+        //Draw the currently active path(s)
         for(Path path : activePaths.values()){
             canvas.drawPath(path, pathPaint);
         }

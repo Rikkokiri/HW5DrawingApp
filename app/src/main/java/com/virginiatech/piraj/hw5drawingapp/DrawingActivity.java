@@ -109,7 +109,7 @@ public class DrawingActivity extends AppCompatActivity {
     private View.OnClickListener undoHandler = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-
+            canvas.undoDraw();
         }
     };
 
@@ -167,4 +167,13 @@ public class DrawingActivity extends AppCompatActivity {
     public void pathDone(int id){
         canvas.pathDone(id);
     }
+
+    public void drawDoubleTapIcon(float posX, float posY){
+        canvas.drawDoubleTapIcon(posX, posY);
+    }
+
+    public void drawLongPressIcon(float posX, float posY){
+        canvas.drawLongPressIcon(posX, posY);
+    }
+
 }

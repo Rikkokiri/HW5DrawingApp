@@ -114,12 +114,9 @@ public class TouchHandler implements View.OnTouchListener {
 
             System.out.println("****** LONG PRESS ******");
 
-            //TODO drawingActivity.onLongPress(event);
-            float x = event.getX();
-            float y = event.getY();
-
-
-
+            for(int i = 0, size = event.getPointerCount(); i < size; i++){
+                drawingActivity.drawLongPressIcon(event.getX(i), event.getY(i));
+            }
 
             super.onLongPress(event);
         }
@@ -129,7 +126,9 @@ public class TouchHandler implements View.OnTouchListener {
 
             System.out.println("****** DOUBLE TAP ******");
 
-            //TODO drawingActivity.onDoubleTap();
+            for(int i = 0, size = event.getPointerCount(); i < size; i++){
+                drawingActivity.drawDoubleTapIcon(event.getX(i), event.getY(i));
+            }
 
             return super.onDoubleTap(event);
         }
